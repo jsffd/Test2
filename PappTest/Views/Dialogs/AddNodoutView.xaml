@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="PappTest.Views.Dialogs.AddNodoutView"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PappTest" 
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:ext="clr-namespace:PappTest.Extensions" 
+             xmlns:md="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:PappTest.ViewModels" xmlns:dialogs="clr-namespace:PappTest.ViewModels.Dialogs" d:DataContext="{d:DesignInstance Type=dialogs:AddNodoutViewModel}"
+             mc:Ignorable="d"  Width="300" Height="320" >
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock
+            Padding="20,10"
+            Text="Nodout" FontWeight="Bold" FontSize="20" />
+
+        <DockPanel Grid.Row="1" LastChildFill="False">
+            
+            <StackPanel Margin="20,10"
+                DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock  Margin="0,0" Text="Name"  VerticalAlignment="Center" />
+                <TextBox
+                Text="{Binding Model.Name}"
+                Margin="20,0" md:HintAssist.Hint="Nodout" DockPanel.Dock="Top"/>
+            </StackPanel>
+            
+           
+            <StackPanel
+                Margin="20,10"
+                DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock Text="Component" VerticalAlignment="Center"/>
+                <ComboBox SelectedIndex="{Binding Model.Component}" Margin="10,0,0,0" 
+                          ItemsSource="{Binding ComList}" DisplayMemberPath="ComName" SelectedValue="{Binding SelectedComCode}" SelectedValuePath="ComID"/>
+
+            </StackPanel>
+
+            <StackPanel
+                  Margin="20,10"
+                DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock Text="Dirction" VerticalAlignment="Center"/>
+                <ComboBox SelectedIndex="{Binding Model.Direction}" Margin="10,0,0,0"
+                          ItemsSource="{Binding DirectionList}" DisplayMemberPath="DirectionName" SelectedValue="{Binding SelectedDirection}" SelectedValuePath="DirectionName" IsEnabled="{Binding AllowDirectionSelection}" />
+
+            </StackPanel>
+
+            <StackPanel  Margin="20,10"
+                DockPanel.Dock="Top" Orientation="Horizontal">
+                <TextBlock  Margin="0,5" Text="ID" VerticalAlignment="Top" />
+                <TextBox  
+                     Text="{Binding Model.ID}"
+                     Margin="20,0" md:HintAssist.Hint="ID" DockPanel.Dock="Top"/>
+            </StackPanel>
+        </DockPanel>
+
+        <StackPanel Margin="10" Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right">
+            <Button Content="取消" Margin="0,0,10,0" Command="{Binding CancelCommand}"
+                   Style="{StaticResource MaterialDesignOutlinedButton}" Cursor="Hand"/>
+            <Button Content="确定"   Command="{Binding SaveCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>
